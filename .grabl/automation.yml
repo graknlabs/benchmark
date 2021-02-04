@@ -141,6 +141,8 @@ build:
           --api-token $GRABL_TOKEN \
           --config-file /home/grabl/$GRABL_REPO/config/config_test.yml
 
+        sleep 3600
+
 #    test-performance-small-grakn-core-background:
 #      # machine: 16cpus-32gb
 #      image: graknlabs-ubuntu-20.04
