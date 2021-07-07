@@ -15,31 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.vaticle.typedb.benchmark.neo4j.driver;
+package com.vaticle.typedb.benchmark.common.concept;
 
-import com.vaticle.typedb.benchmark.simulation.driver.Session;
+public class Parentship {
 
+    private final Person mother;
+    private final Person father;
+    private final Person child;
 
-public class Neo4jSession implements Session<Neo4jTransaction> {
-
-    private final org.neo4j.driver.Session nativeSession;
-
-    public Neo4jSession(org.neo4j.driver.Session nativeSession) {
-        this.nativeSession = nativeSession;
+    public Parentship(Person mother, Person father, Person child) {
+        this.mother = mother;
+        this.father = father;
+        this.child = child;
     }
 
-    @Override
-    public Neo4jTransaction transaction() {
-        return new Neo4jTransaction(nativeSession);
+    public Person mother() {
+        return mother;
     }
 
-    @Override
-    public Neo4jTransaction reasoningTransaction() {
-        throw new UnsupportedOperationException("Neo4j does not support reasoning transactions");
+    public Person father() {
+        return father;
     }
 
-    @Override
-    public void close() {
-        nativeSession.close();
+    public Person child() {
+        return child;
     }
 }

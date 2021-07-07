@@ -15,31 +15,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.vaticle.typedb.benchmark.neo4j.driver;
+package com.vaticle.typedb.benchmark.common.concept;
 
-import com.vaticle.typedb.benchmark.simulation.driver.Session;
+import java.time.LocalDateTime;
 
+public class Marriage {
 
-public class Neo4jSession implements Session<Neo4jTransaction> {
+    private final Person wife;
+    private final Person husband;
+    private final String licence;
+    private final LocalDateTime date;
 
-    private final org.neo4j.driver.Session nativeSession;
-
-    public Neo4jSession(org.neo4j.driver.Session nativeSession) {
-        this.nativeSession = nativeSession;
+    public Marriage(Person wife, Person husband, String licence, LocalDateTime date) {
+        this.wife = wife;
+        this.husband = husband;
+        this.licence = licence;
+        this.date = date;
     }
 
-    @Override
-    public Neo4jTransaction transaction() {
-        return new Neo4jTransaction(nativeSession);
+    public String licence() {
+        return licence;
     }
 
-    @Override
-    public Neo4jTransaction reasoningTransaction() {
-        throw new UnsupportedOperationException("Neo4j does not support reasoning transactions");
+    public Person wife() {
+        return wife;
     }
 
-    @Override
-    public void close() {
-        nativeSession.close();
+    public Person husband() {
+        return husband;
+    }
+
+    public LocalDateTime date() {
+        return date;
     }
 }

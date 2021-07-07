@@ -32,8 +32,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Context implements AutoCloseable {
 
-    public static final int AGE_OF_ADULTHOOD = 21;
-    public static final int AGE_OF_FRIENDSHIP = 14;
+    public static final int LENGTH_OF_MARRIAGE_BEFORE_PARENTSHIP = 1;
+    public static final int AGE_OF_ADULTHOOD = 1;
+    public static final int AGE_OF_FRIENDSHIP = 2;
     private static final Logger LOG = LoggerFactory.getLogger(Context.class);
 
     private final boolean isTracing;
@@ -95,7 +96,11 @@ public class Context implements AutoCloseable {
     }
 
     public LocalDateTime today() {
-        return LocalDateTime.of(LocalDate.ofYearDay(2000 + iteration.get(), 1), LocalTime.of(0, 0, 0));
+        return startDay().plusYears(iteration.get() - 1);
+    }
+
+    public LocalDateTime startDay() {
+        return LocalDateTime.of(LocalDate.ofYearDay(2000, 1), LocalTime.of(0, 0, 0));
     }
 
     public SeedData seedData() {
